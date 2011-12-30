@@ -46,12 +46,7 @@
 					<execution>
 						<id>copy-dependencies</id>
 						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<!-- configure the plugin here -->
-						</configuration>
+						<goals><goal>copy-dependencies</goal></goals>
 					</execution>
 				</executions>
 			</plugin>
