@@ -1,6 +1,6 @@
-## JAX-RS with Jersey/Grizzly on Heroku
+## JAX-RS with Jersey and Grizzly or Jetty on Heroku
 
-JAX-RS is a great way to build RESTful services in Java. This is a very quick and simple example of how you can deploy a JAX-RS application on Heroku. It's based on the helloworld sample in the [Jersey 1.0.3 samples collection](http://download.java.net/maven/2/com/sun/jersey/samples/jersey-samples/1.0.3/jersey-samples-1.0.3-project.zip). A few tweaks was made which you can see in the commit log.
+JAX-RS is a great way to build RESTful services in Java. This is a very quick and simple example of how you can deploy a JAX-RS application on Heroku. 
 
 Assuming you're already set up with Heroku including the foreman tool, all you need to do to run this locally is
 
@@ -16,4 +16,10 @@ To deploy to Heroku:
 3. curl http://[appname].herokuapp.com/hello
 
 It's that simple.
+
+## Grizzly or Jetty
+
+The master branch currently uses Grizzly. If you want to use Jetty, check out the jetty branch instead:
+
+    $ git clone -b jetty git@github.com:jesperfj/jax-rs-heroku.git
 
