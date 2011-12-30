@@ -1,21 +1,27 @@
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
-import com.sun.grizzly.http.SelectorThread;
-import com.sun.jersey.api.container.grizzly.GrizzlyWebContainerFactory;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
+
+import com.sun.jersey.spi.container.servlet.ServletContainer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         
-        final String baseUri = "http://localhost:"+(System.getenv("PORT")!=null?System.getenv("PORT"):"9998")+"/";
-        final Map<String, String> initParams = new HashMap<String, String>();
-
-        initParams.put("com.sun.jersey.config.property.packages","resources");
-        
-        System.out.println("Starting grizzly...");
-        SelectorThread threadSelector = GrizzlyWebContainerFactory.create(baseUri, initParams);
-        System.out.println(String.format("Jersey started with WADL available at %sapplication.wadl.",baseUri, baseUri));
-    }
+        Server server = new Server(Integer.valueOf(System.getenv("PORT")));
+        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.setContextPath("/");
+        server.setHandler(context);
+        ServletHolder h = new ServletHolder(new ServletContainer());
+        h.setInitParameter("com.sun.jersey.config.property.packages", "resources");
+        context.addServlet(h, "/*");
+        try {
+            server.start();
+            server.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+}
 }
