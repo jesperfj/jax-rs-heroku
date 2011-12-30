@@ -1,1 +1,1 @@
-web:    sh target/bin/app
+web:    java -cp "target/dependency/*":target/classes Main
